@@ -4,6 +4,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-void scanI2CDevices();
+byte scanI2CDevices();
 
 #endif
