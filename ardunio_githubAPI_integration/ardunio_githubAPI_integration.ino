@@ -6,12 +6,6 @@
 
 ArduinoLEDMatrix matrix;
 
-const uint32_t happy[] = {
-    0x19819,
-    0x80000001,
-    0x81f8000
-};
-
 void setup() {
   // put your setup code here, to run once:
   Wire.begin();
@@ -21,7 +15,7 @@ void setup() {
   matrix.begin();
 
   //matrix.loadFrame(LEDMATRIX_LIKE);
-
+  
   matrix.play(true);
 
   byte i2cDeviceAddress = scanI2CDevices();
