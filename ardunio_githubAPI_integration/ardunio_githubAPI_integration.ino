@@ -11,12 +11,12 @@ void setup() {
   Wire.begin();
   Serial.begin(9600);
   
-  matrix.loadSequence(frames);
-  matrix.begin();
-
-  //matrix.loadFrame(LEDMATRIX_LIKE);
-  
+  //matrix.loadSequence(frames);
+  matrix.loadSequence(LEDMATRIX_ANIMATION_TETRIS_INTRO);
+  matrix.begin();  
   matrix.play(true);
+
+  //matrix.renderBitmap(arduinoLogoframe, 8, 12);
 
   byte i2cDeviceAddress = scanI2CDevices();
 
