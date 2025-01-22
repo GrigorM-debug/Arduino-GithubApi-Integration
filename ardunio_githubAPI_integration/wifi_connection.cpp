@@ -50,6 +50,8 @@ int connectedToWifi(
     if(wifiConnectedAnimation){
       wifiConnectedAnimation(); //trigger the animation
     }
+
+    printCurrentConnectedNetworkData();
   } 
   else{
     Serial.print("Failed to connect to WPA SSID: ");
@@ -57,4 +59,45 @@ int connectedToWifi(
   }
 
   return status;
+}
+
+void printMacAddress(byte mac[]){
+  for(int i = 0; i < 6; i++){
+    if(i > 0){
+      Serial.print(":");
+    }
+
+    if(mac[i] < 6){
+      Serial.print("0");
+    }
+
+    Serial.print(mac[i], HEX);
+  }
+
+  Serial.println();
+}
+
+void printCurrentConnectedNetworkData(){
+  Serial.println("Current Connected Network Data: ");
+
+  //Print current connected network SSID
+  Serial.print("  SSID: ");
+  Serial.println(WiFi.SSID());
+
+  //Print current connected network MAC Address
+  byte bssid[6];
+  WiFi.BSSID(bssid);
+  Serial.print("BSSID: ");
+  printMacAddress(bssid);
+
+  //Print the connection signal strength
+  long rssi = WiFi.RSSI();
+  Serial.print("  Signal strength (RSSI): ");
+  Serial.println(rssi);
+
+  //Print the encryption type
+  byte encryption = WiFi.encryptionType();
+  Serial.print("  Encryption type: ");
+  Serial.println(encryption, HEX);
+  Serial.println();
 }

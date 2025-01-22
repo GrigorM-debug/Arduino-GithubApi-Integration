@@ -4,8 +4,9 @@
 #include <Arduino.h>
 #include <WiFiS3.h>
 #include <functional>
+using namespace std;
 
-using AnimationCallback = std::function<void()>;
+using AnimationCallback = function<void()>;
 
 int connectedToWifi(
         const char* ssid, 
@@ -13,5 +14,10 @@ int connectedToWifi(
         AnimationCallback wifiSearchingAnimation = nullptr, 
         AnimationCallback wifiConnectedAnimation = nullptr, 
         AnimationCallback wifiNotConnectedAnimation = nullptr);
+
+void printMacAddress(byte mac[]);
+
+void printCurrentConnectedNetworkData();
+
 
 #endif
