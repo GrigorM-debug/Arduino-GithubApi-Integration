@@ -4,11 +4,12 @@
 #include <LiquidCrystal_I2C.h>
 #include "wifi_connection.h"
 #include "arduino_LED_matrix_animations.h"
+#include "web_server.h"
 
 void setup() {
   // put your setup code here, to run once:
   Wire.begin();
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   byte i2cDeviceAddress = scanI2CDevices();
 
@@ -18,24 +19,20 @@ void setup() {
     //Connect to Wifi
     int wifiConnectionStatus = connectedToWifi(
                                   SECRET_SSID, 
-                                  SECRET_PASSWORD, 
-                                  wifiSearchingAnimation,
-                                  wifiConnectedAnimation,
-                                  wifiNotConnectedAnimation
+                                  SECRET_PASSWORD
                                 );
-    
-    if(wifiConnectionStatus == WL_CONNECTED){
-      if(defaultAnimation){
-        defaultAnimation();
-      }
-
-      lcd.init();
-      lcd.backlight();
-      lcd.print("Connected");
+        
+    if(wifiConnectionStatus == 3){
+      startServer();
+      //server.begin();
+      // lcd.init();
+      // lcd.backlight();
+      // lcd.print("Connected");
     } 
   }
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  handleClient();
 }

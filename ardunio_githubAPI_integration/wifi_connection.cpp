@@ -1,13 +1,16 @@
 #include "wifi_connection.h"
+#include "arduino_LED_matrix_animations.h"
 
 int status = WL_IDLE_STATUS;
 
+IPAddress local_IP(192, 168, 0, 184);        // Desired static IP address within router's subnet
+IPAddress gateway(192, 168, 0, 102);           // Your router's IP address
+IPAddress subnet(255, 255, 255, 0);          // Subnet mask
+IPAddress dns(8, 8, 8, 8);
+
 int connectedToWifi(
   const char* ssid, 
-  const char* password, 
-  AnimationCallback wifiSearchingAnimation, 
-  AnimationCallback wifiConnectedAnimation, 
-  AnimationCallback wifiNotConnectedAnimation
+  const char* password
 ){
   //Check for Wifi module
   if(WiFi.status() == WL_NO_MODULE){
@@ -26,6 +29,9 @@ int connectedToWifi(
   if(firmwareVersion < WIFI_FIRMWARE_LATEST_VERSION){
     Serial.println("Upgrade the firmware version");
   }
+
+  // Configure static IP
+  WiFi.config(local_IP, dns, gateway, subnet);
 
   //Connecting to Wifi network
   while(status != WL_CONNECTED){
@@ -52,6 +58,7 @@ int connectedToWifi(
     }
 
     printCurrentConnectedNetworkData();
+    printArduinoBoardWifiData();
   } 
   else{
     Serial.print("Failed to connect to WPA SSID: ");
@@ -100,4 +107,10 @@ void printCurrentConnectedNetworkData(){
   Serial.print("  Encryption type: ");
   Serial.println(encryption, HEX);
   Serial.println();
+}
+
+void printArduinoBoardWifiData(){
+  IPAddress ip = WiFi.localIP();
+  Serial.print("To see this page in action open this link: http://");
+  Serial.println(ip);
 }
