@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <WiFiS3.h>
 #include <functional>
+#include <iostream>
 using namespace std;
 
 using AnimationCallback = function<void()>;
@@ -18,6 +19,5 @@ int connectedToWifi(
 void printMacAddress(byte mac[]);
 
 void printCurrentConnectedNetworkData();
-
 
 #endif

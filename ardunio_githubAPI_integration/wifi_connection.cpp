@@ -87,7 +87,7 @@ void printCurrentConnectedNetworkData(){
   //Print current connected network MAC Address
   byte bssid[6];
   WiFi.BSSID(bssid);
-  Serial.print("BSSID: ");
+  Serial.print("  BSSID: ");
   printMacAddress(bssid);
 
   //Print the connection signal strength
