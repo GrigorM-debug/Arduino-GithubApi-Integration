@@ -24,9 +24,4 @@ void wifiNotConnectedAnimation(){
   delay(3000);
 }
 
-//Default animation playing
-void defaultAnimation() {
-  matrix.loadSequence(LEDMATRIX_ANIMATION_TETRIS_INTRO);
-  matrix.begin();  
-  matrix.play(true);
-}
+

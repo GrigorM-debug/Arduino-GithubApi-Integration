@@ -11,6 +11,4 @@ void wifiConnectedAnimation();
 
 void wifiNotConnectedAnimation();
 
-void defaultAnimation();
-
 #endif
